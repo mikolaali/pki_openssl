@@ -195,7 +195,7 @@ createPKI()
   # Request for server certificate creation
   sudo openssl req -nodes -newkey rsa:4096 -sha256 -rand $RAND -keyout $KEYS/$SERVER_NAME.key -out $KEYS/$SERVER_NAME.csr -config cfg -subj $SERVER_SUBJ
   # Sign request , need v3.file to create
-  sudo openssl ca -days 3650 -extfile v3.$KEY_USAGE_SERVER -cert $KEYS/ca.cert -keyfile $KEYS/ca.key -in $KEYS/$SERVER_NAME.csr -out $KEYS/$SERVER_NAME.cert -config cfg -batch
+  sudo openssl ca -days 3650 -extfile v3.$KEY_USAGE_SERVER -cert $KEYS/ca.cert -keyfile $KEYS/ca.key -in $KEYS/$SERVER_NAME.csr -out $KEYS/$SERVER_NAME.cert -config cfg -notext -batch
   # Create config for server $CONF/$SERVER_NAME.conf
   confServerCreate
   # Create crl.pem list
@@ -216,7 +216,7 @@ createClient()
   -subj $CLIENT_SUBJ
 
   #openssl x509 -req -sha256 -days 3650 -extfile v3.$KEY_USAGE_CLIENT -CA $KEYS/ca.cert -CAkey $KEYS/ca.key -CAcreateserial -in $KEYS/$client.csr -out $KEYS/$client.cert
-  sudo openssl ca  -days 3650 -extfile v3.$KEY_USAGE_CLIENT -in $KEYS/$client.csr -out $KEYS/$client.cert -config cfg -batch
+  sudo openssl ca  -days 3650 -extfile v3.$KEY_USAGE_CLIENT -in $KEYS/$client.csr -out $KEYS/$client.cert -config cfg -notext -batch
   sudo touch $CCD/$client
   confClientCreate $client
   rm -rf v3.*

@@ -14,7 +14,7 @@
    e. server.conf
    f. client.key|cert
    g. clinet.conf from file or array
-   h. crl.pem fake cert -> revoke
+   h. openssl ca -gencrl crl.pem 
    i. mkdir ccd
 # 2.
 
